@@ -17,6 +17,7 @@ import akka.cluster.ClusterEvent.MemberUp
 import akka.cluster.ClusterEvent.MemberExited
 import akka.cluster.ClusterEvent.MemberDowned
 import akka.cluster.ClusterEvent.UnreachableMember
+import controllers.SimpleMessage
 
 class ClusterPlugin(app: Application) extends Plugin {
   lazy val system = ActorSystem("ClusterSystem")
@@ -27,6 +28,7 @@ class ClusterPlugin(app: Application) extends Plugin {
     Cluster(system).subscribe(clusterListener, classOf[ClusterDomainEvent])
     val clusterStateActor = system.actorOf(Props[ClusterStateActor], "clusterState")
     Cluster(system).subscribe(clusterStateActor, classOf[ClusterDomainEvent])
+    val broadcastActor = system.actorOf(Props[BroadcastActor], "broadcast")
   }
 
 
@@ -64,6 +66,13 @@ class ClusterLoggingActor extends Actor {
 case object MemberInformationQuestion
 case class MemberInformation(members: SortedSet[Member])
 
+class BroadcastActor extends Actor {
+  def receive = {
+    case SimpleMessage(message) => Logger.info("received broadcast message:" + message)
+    case _ => Logger.warn("do not understand")
+  }
+}
+
 class ClusterStateActor extends Actor {
   var members: SortedSet[Member] = SortedSet()
 
@@ -73,5 +82,10 @@ class ClusterStateActor extends Actor {
     case MemberRemoved(member) => members -= member
     case MemberDowned(member) => members -= member
     case MemberInformationQuestion => sender tell (MemberInformation(members), self)
+    case s: SimpleMessage => {
+      members.foreach { member =>
+        context.actorFor(RootActorPath(member.address) / "user" / "broadcast") tell s
+      }
+    }
   }
 }
