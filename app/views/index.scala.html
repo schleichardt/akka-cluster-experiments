@@ -1,7 +1,7 @@
-@(message: String)
+@(memberInformation: info.schleichardt.experiments.akka.cluster.MemberInformation)
 
-@main("Welcome to Play 2.1") {
-    
-    @play20.welcome(message)
-    
+@main("Cluster state") {
+    <h1>Cluster status</h1>
+    <h2>Members</h2>
+    @Html(memberInformation.members.mkString("<ul><li>", "</li><li>", "</li></ul>"))
 }
