@@ -1,0 +1,1 @@
+sbt -Dhttp.port=9000 -Dakka.remote.netty.port=2551 run
