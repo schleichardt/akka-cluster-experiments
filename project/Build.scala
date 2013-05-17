@@ -9,6 +9,7 @@ object ApplicationBuild extends Build {
 
   val appDependencies = Seq(
     "com.typesafe.akka" %% "akka-cluster-experimental" % "2.1.4"
+    , "junit" % "junit-dep" % "4.11" % "test"
   )
 
 
