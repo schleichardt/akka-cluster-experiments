@@ -3,5 +3,9 @@
 @main("Cluster state") {
     <h1>Cluster status</h1>
     <h2>Members</h2>
-    @Html(memberInformation.members.mkString("<ul><li>", "</li><li>", "</li></ul>"))
+    @if(memberInformation.members.size > 0) {
+        @Html(memberInformation.members.mkString("<ul><li>", "</li><li>", "</li></ul>"))
+    } else {
+        <p>No members up.</p>
+    }
 }
