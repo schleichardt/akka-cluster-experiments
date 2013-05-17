@@ -1,6 +1,6 @@
 package controllers
 
-import info.schleichardt.experiments.akka.cluster.{MemberInformation, MemberInformationQuestion, ClusterInitializationPlugin}
+import info.schleichardt.experiments.akka.cluster.{MemberInformation, MemberInformationQuestion, ClusterPlugin}
 import play.api._
 import play.api.mvc._
 import akka.pattern.ask
@@ -12,7 +12,7 @@ object Application extends Controller {
   
   def index = Action {
     implicit val timeout = Timeout(500)
-    val stateActor = Play.current.plugin(classOf[ClusterInitializationPlugin]).get.stateActor
+    val stateActor = Play.current.plugin(classOf[ClusterPlugin]).get.stateActor
     val clusterInformation = (stateActor ask MemberInformationQuestion).mapTo[MemberInformation]
     AsyncResult {
       clusterInformation map { c =>

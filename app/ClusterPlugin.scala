@@ -18,7 +18,7 @@ import akka.cluster.ClusterEvent.MemberExited
 import akka.cluster.ClusterEvent.MemberDowned
 import akka.cluster.ClusterEvent.UnreachableMember
 
-class ClusterInitializationPlugin(app: Application) extends Plugin {
+class ClusterPlugin(app: Application) extends Plugin {
   lazy val system = ActorSystem("ClusterSystem")
 
   override def onStart() {
@@ -71,6 +71,7 @@ class ClusterStateActor extends Actor {
     case state: CurrentClusterState => members = state.members
     case MemberUp(member) => members += member
     case MemberRemoved(member) => members -= member
+    case MemberDowned(member) => members -= member
     case MemberInformationQuestion => sender tell (MemberInformation(members), self)
   }
 }
