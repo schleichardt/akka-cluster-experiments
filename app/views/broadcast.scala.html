@@ -1,8 +1,0 @@
-@(simpleMessageForm: Form[SimpleMessage])
-
-@main("broadcast") {
-    @helper.form(action = routes.Application.sendBroadcastMessage) {
-        @helper.inputText(simpleMessageForm("message"))
-        <input type="submit">
-    }
-}
