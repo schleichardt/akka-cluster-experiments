@@ -15,3 +15,5 @@ libraryDependencies += "com.typesafe.akka" %% "akka-contrib" % akkaVersion
 
 libraryDependencies += "com.typesafe.akka" %% "akka-cluster" % akkaVersion
 
+libraryDependencies += "com.typesafe.akka" %% "akka-persistence-experimental" % akkaVersion
+
