@@ -4,6 +4,7 @@
 1. http://doc.akka.io/docs/akka/2.3-M2/dev/multi-node-testing.html
 
 ## Notes
+* https://github.com/akka/akka/blob/master/akka-contrib/src/multi-jvm/scala/akka/contrib/pattern/ClusterSingletonManagerSpec.scala
 * root/src/multi-jvm/scala instead of root/src/main/multi-jvm
 * how to eliminate dead letter warnings by shuting down correctly?
 * how work with test dependencies, https://groups.google.com/forum/#!searchin/akka-user/multi-jvm/akka-user/Ecbyw5xafYA/7zRdxASc_uAJ
