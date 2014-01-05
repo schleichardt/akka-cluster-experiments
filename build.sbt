@@ -9,7 +9,7 @@ scalacOptions ++= Seq("-feature")
 
 resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.0"//TODO multi-jvm needs this in compile scope, bring it back to compile
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.0" % "compile,test"
 
 val akkaVersion = "2.3-M2"
 
@@ -19,9 +19,9 @@ libraryDependencies += "com.typesafe.akka" %% "akka-cluster" % akkaVersion
 
 libraryDependencies += "com.typesafe.akka" %% "akka-persistence-experimental" % akkaVersion
 
-libraryDependencies += "com.typesafe.akka" %% "akka-testkit" % akkaVersion
+libraryDependencies += "com.typesafe.akka" %% "akka-testkit" % akkaVersion % "compile,test"
 
-libraryDependencies += "com.typesafe.akka" %% "akka-multi-node-testkit" % akkaVersion
+libraryDependencies += "com.typesafe.akka" %% "akka-multi-node-testkit" % akkaVersion % "compile,test"
 
 //see http://doc.akka.io/docs/akka/2.3-M2/dev/multi-jvm-testing.html#multi-jvm-testing
 lazy val multiJvmSettingsForThisProject = SbtMultiJvm.multiJvmSettings ++ Seq(
@@ -45,7 +45,5 @@ lazy val multiJvmSettingsForThisProject = SbtMultiJvm.multiJvmSettings ++ Seq(
 )
 
 multiJvmSettingsForThisProject
-
-libraryDependencies in MultiJvm <<= (libraryDependencies in Test)
 
 jvmOptions in MultiJvm := Seq("-Dmultinode.max-nodes=4")
