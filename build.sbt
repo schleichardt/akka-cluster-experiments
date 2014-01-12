@@ -47,3 +47,5 @@ lazy val multiJvmSettingsForThisProject = SbtMultiJvm.multiJvmSettings ++ Seq(
 multiJvmSettingsForThisProject
 
 jvmOptions in MultiJvm := Seq("-Dmultinode.max-nodes=4")
+
+val root = project in file(".") configs(MultiJvm)
