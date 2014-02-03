@@ -11,7 +11,7 @@ resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/release
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.0" % "compile,test"
 
-val akkaVersion = "2.3.0-RC1"
+val akkaVersion = "2.3.0-RC2"
 
 libraryDependencies += "com.typesafe.akka" %% "akka-contrib" % akkaVersion
 
