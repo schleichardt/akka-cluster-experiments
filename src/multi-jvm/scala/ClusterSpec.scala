@@ -18,12 +18,12 @@ object ClusterSpecConfig extends MultiNodeConfig {
   commonConfig(ConfigFactory.parseString(""" akka.actor.provider="akka.cluster.ClusterActorRefProvider" """))
 }
 
-class WordsClusterSpecMultiJvmNode1 extends WordsClusterSpec
-class WordsClusterSpecMultiJvmNode2 extends WordsClusterSpec
-class WordsClusterSpecMultiJvmNode3 extends WordsClusterSpec
-class WordsClusterSpecMultiJvmNode4 extends WordsClusterSpec
+class ClusterSpecMultiJvmNode1 extends ClusterSpec
+class ClusterSpecMultiJvmNode2 extends ClusterSpec
+class ClusterSpecMultiJvmNode3 extends ClusterSpec
+class ClusterSpecMultiJvmNode4 extends ClusterSpec
 
-class WordsClusterSpec extends MultiNodeSpec(ClusterSpecConfig) with WordSpecLike with MustMatchers with MultiSpec with ImplicitSender {
+class ClusterSpec extends MultiNodeSpec(ClusterSpecConfig) with WordSpecLike with MustMatchers with MultiSpec with ImplicitSender {
 
   import ClusterSpecConfig._
 
